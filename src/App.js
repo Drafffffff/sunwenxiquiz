@@ -10,7 +10,7 @@ const supabase = createClient(
 );
 function App() {
   const [dataList, setDataList] = useState(0);
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState("高校学生");
   const [times, setTimes] = useState(1);
   const [completeflag, setCompleteflag] = useState(0);
   const wordList = [
@@ -81,7 +81,12 @@ function App() {
       console.log({ ...dataList });
     }
   }
-  function dislikeSubmit() {
+  async function dislikeSubmit() {
+    const d = { ...dataList };
+    d.user = subject;
+    d.like = 1;
+    const { data, error } = await supabase.from("data").insert([d]);
+    console.log(data, error);
     if (timesChange()) {
       init();
       console.log("dislikeSubmit");
@@ -118,12 +123,12 @@ function App() {
                   return setSubject(e.target.value);
                 }}
               >
-                <option value="select-dropdown">高校学生</option>
-                <option value="with-options">高校教师</option>
-                <option value="with-options">企业工作者</option>
-                <option value="with-options">环保主义者</option>
-                <option value="with-options">独立策展人</option>
-                <option value="with-options">vintage爱好者</option>
+                <option value="高校学生">高校学生</option>
+                <option value="高校教师">高校教师</option>
+                <option value="企业工作者">企业工作者</option>
+                <option value="环保主义者">环保主义者</option>
+                <option value="独立策展人">独立策展人</option>
+                <option value="vintage爱好者">vintage爱好者</option>
               </Form.Select>
             </Form.Control>
           </Form.Field>
