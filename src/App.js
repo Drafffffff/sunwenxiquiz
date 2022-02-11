@@ -13,6 +13,7 @@ function App() {
   const [subject, setSubject] = useState("高校学生");
   const [times, setTimes] = useState(1);
   const [completeflag, setCompleteflag] = useState(0);
+  const [clickable, setClickable] = useState(1);
   const wordList = [
     "优雅的",
     "中性的",
@@ -70,6 +71,7 @@ function App() {
     return text;
   }
   async function likeSubmit() {
+    setClickable(0);
     const d = { ...dataList };
     d.user = subject;
     d.like = 1;
@@ -78,10 +80,11 @@ function App() {
     if (timesChange()) {
       init();
       console.log("likeSubmit");
-      console.log({ ...dataList });
+      setClickable(1);
     }
   }
   async function dislikeSubmit() {
+    setClickable(0);
     const d = { ...dataList };
     d.user = subject;
     d.like = 0;
@@ -90,6 +93,7 @@ function App() {
     if (timesChange()) {
       init();
       console.log("dislikeSubmit");
+      setClickable(1);
     }
   }
   function timesChange() {
@@ -143,10 +147,18 @@ function App() {
           </Form.Field>
           <Form.Field className="submit">
             <Button.Group align={"default"} size={"default"}>
-              <Button renderAs="span" color="success" onClick={likeSubmit}>
+              <Button
+                renderAs="span"
+                color="success"
+                onClick={clickable ? likeSubmit : null}
+              >
                 喜欢
               </Button>
-              <Button renderAs="span" color="danger" onClick={dislikeSubmit}>
+              <Button
+                renderAs="span"
+                color="danger"
+                onClick={clickable ? dislikeSubmit : null}
+              >
                 不喜欢
               </Button>
             </Button.Group>
