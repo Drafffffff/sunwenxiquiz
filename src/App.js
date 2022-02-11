@@ -84,7 +84,7 @@ function App() {
   async function dislikeSubmit() {
     const d = { ...dataList };
     d.user = subject;
-    d.like = 1;
+    d.like = 0;
     const { data, error } = await supabase.from("data").insert([d]);
     console.log(data, error);
     if (timesChange()) {
