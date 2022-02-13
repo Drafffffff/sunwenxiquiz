@@ -5,7 +5,7 @@
 }
 .form {
   margin: auto;
-  padding: 20px;  
+  padding: 20px;
 }
 .shenfen {
   margin-top: 30px;
@@ -27,4 +27,12 @@
   justify-content: center;
   align-items: center;
   font-size: 1.5rem;
+}
+
+.its {
+  color: rgb(237, 116, 24);
+  font-size: x-large;
+}
+.itsnot {
+  color: rgb(237, 116, 24);
 }

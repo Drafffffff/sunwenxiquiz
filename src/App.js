@@ -15,42 +15,22 @@ function App() {
   const [completeflag, setCompleteflag] = useState(0);
   const [clickable, setClickable] = useState(1);
   const wordList = [
-    "优雅的",
     "中性的",
-    "运动的",
-    "可爱的",
-    "简约的",
-    "个性的",
-    "时尚的",
-    "手工的",
-    "有文字的",
-    "有LOGO的",
-    "大面积纯色的",
-    "有色块分割的",
-    "有私定信息的",
-    "独一无二的",
-    "明快的",
-    "有细节的",
-    "可双肩背的",
-    "可斜背的",
-    "可手提的",
-    "可单肩斜跨的",
-    "可拆卸的",
-    "有隔层的",
-    "易收纳的",
-    "节省空间的",
-    "硬挺的",
-    "光滑的",
-    "厚重的",
-    "精致的",
-    "有肌理的",
+    "带有复古感的",
     "圆润的",
-    "配件较多的",
-    "材质统一的",
+    "撞色的",
+    "包面定制化的",
+    "有展览信息的",
+    "有多种背法的",
+    "容量大的",
+    "可变形的",
+    "硬挺的",
+    "有肌理的",
+    "不同材质搭配的",
   ];
   function init() {
     const tmpList = [];
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < 12; i++) {
       tmpList.push(Math.random() >= 0.5);
     }
     setDataList(tmpList);
@@ -64,7 +44,18 @@ function App() {
     for (let i = 0; i < dataList.length; i++) {
       if (dataList[i]) {
         text += wordList[i];
-        text += ",";
+        text += "　";
+      }
+    }
+    text = text.substr(0, text.length - 1);
+    return text;
+  }
+  function makeNText() {
+    let text = "";
+    for (let i = 0; i < dataList.length; i++) {
+      if (!dataList[i]) {
+        text += wordList[i];
+        text += "　";
       }
     }
     text = text.substr(0, text.length - 1);
@@ -113,13 +104,11 @@ function App() {
         <form className="form">
           <Form.Field>
             <Form.Label>
-              您好！我是中国美术学院 2022
-              届艺术设计学科的一名毕业生，毕业论文研究涉及到电脑包的相关设计，以下问卷中有
-              10 道问题需要您的助力作答，超级感谢您为我的毕业撑腰！-
+              您好！我是中国美术学院艺术设计学的一名毕业生，毕业作品涉及到“用回收线下展览物料”设计成的电脑包的相关研究，以下问卷中有10道问题需要您的助力作答。您的作答对我至关重要，超级感谢您对我的毕业撑腰！
             </Form.Label>
           </Form.Field>
           <Form.Field className="shenfen">
-            <Form.Label size="medium">您的身份是</Form.Label>
+            <Form.Label >您的身份是</Form.Label>
             <Form.Control>
               <Form.Select
                 value={subject}
@@ -137,13 +126,13 @@ function App() {
             </Form.Control>
           </Form.Field>
           <Form.Field className="wenti">
-            <Form.Label>您是否会喜欢一个</Form.Label>
+            <Form.Label>您是否会喜欢带有以下描述特征的电脑包？</Form.Label>
           </Form.Field>
           <Form.Field className="textField">
+            <Form.Label size="medium" className="its">它是</Form.Label>
             <Form.Label size="medium"> {makeText()}</Form.Label>
-          </Form.Field>
-          <Form.Field>
-            <Form.Label> 的电脑包？</Form.Label>
+            <Form.Label size="medium" className="itsnot">但不是</Form.Label>
+            <Form.Label size="medium"> {makeNText()}</Form.Label>
           </Form.Field>
           <Form.Field className="submit">
             <Button.Group align={"default"} size={"default"}>
